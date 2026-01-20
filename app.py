@@ -36,9 +36,10 @@ def load_and_clean_data(files, type_name):
     df_list = []
     for f in files:
         try:
-            temp_df = pd.read_csv(f)
+            temp_df = pd.read_csv(f, nrows=50000)
             df_list.append(temp_df)
-        except:
+        except Exception as e:
+            st.error(f"Error loading {f}: {e}")
             continue
     
     if not df_list:
